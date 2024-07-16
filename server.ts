@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import bootstrap from './src/main.server';
 import { dbConnection } from './db_connection';
+import cors from 'cors';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -15,6 +16,7 @@ export function app(): express.Express {
 
   const commonEngine = new CommonEngine();
 
+  server.use(cors());
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
   server.use(express.json());
@@ -55,7 +57,7 @@ export function app(): express.Express {
       });
     });
 
-  server.get('/api/isFull', (req, res) => {
+  server.get('/api/isfull', (req, res) => {
     const query = 'SELECT * FROM saunas where customers < size';
 
     dbConnection.query(query, (error, results) => {

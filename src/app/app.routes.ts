@@ -12,5 +12,5 @@ export const routes: Routes = [
     path: 'saunas',
     component: SaunasComponent,
   },
-  { path: '*', component: ErrorComponent },
+  { path: '**', component: ErrorComponent },
 ];

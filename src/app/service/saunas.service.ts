@@ -9,7 +9,7 @@ import { Saunas } from './saunas';
 export class SaunasService {
   private host = 'https://kharon.alwaysdata.net';
   private saunasUrl = `${this.host}/api/saunas`;
-  private isFullUrl = `${this.host}/api/isFull`;
+  private isFullUrl = `${this.host}/api/isfull`;
   constructor(private http: HttpClient) {}
   options = {
     headers: new HttpHeaders({
