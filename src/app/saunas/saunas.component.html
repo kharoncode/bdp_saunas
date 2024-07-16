@@ -1,0 +1,4 @@
+<div *ngFor="let sauna of saunasList">
+  <h4>{{ sauna.name }} {{ sauna.customers }}/{{ sauna.size }}</h4>
+  <p>{{ sauna.customers === sauna.size ? "Complet" : "Libre" }}</p>
+</div>
