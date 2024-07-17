@@ -1,12 +1,17 @@
-import * as mysql from 'mysql2';
+//import * as mysql from 'mysql2';
+
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const mysql = require('mysql2');
+import { ConnectionOptions, Connection } from 'mysql2';
 
 // Informations de connexion à votre base de données Alwaysdata
-const dbConnection = mysql.createConnection({
+const dbConnection: Connection = mysql.createConnection({
   host: 'mysql-username.alwaysdata.net',
   user: 'kharon',
   password: 'GloireAKeldar',
   database: 'kharon_sauna_db',
-});
+} as ConnectionOptions);
 
 dbConnection.connect((err) => {
   if (err) {

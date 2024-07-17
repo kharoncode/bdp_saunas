@@ -1,4 +1,32 @@
-<div *ngFor="let sauna of saunasList">
-  <h4>{{ sauna.name }} {{ sauna.customers }}/{{ sauna.size }}</h4>
-  <p>{{ sauna.customers === sauna.size ? "Complet" : "Libre" }}</p>
+<div class="p-3 flex justify-between">
+  <div class="w-1/4 flex justify-center align-middle">
+    <h4 class="text-center">Nom</h4>
+  </div>
+  <div class="w-1/4 flex justify-center align-middle">
+    <p>Taille</p>
+  </div>
+  <div class="w-1/4 flex justify-center align-middle">
+    <p>Status</p>
+  </div>
+  <div class="w-1/4 flex justify-center align-middle"></div>
 </div>
+<div
+  class="p-3 even:bg-cyan-200 flex justify-between"
+  *ngFor="let sauna of saunasList"
+>
+  <div class="w-1/4 flex justify-center align-middle">
+    <h4 class="text-center">
+      {{ sauna.name }}
+    </h4>
+  </div>
+  <div class="w-1/4 flex justify-center align-middle">
+    <p>{{ sauna.customers }}/{{ sauna.size }}</p>
+  </div>
+  <div class="w-1/4 flex justify-center align-middle">
+    <p>{{ sauna.customers != 0 ? "Occupé" : "Libre" }}</p>
+  </div>
+  <div class="w-1/4 flex justify-center align-middle">
+    <div>Edit - Empty - Delete</div>
+  </div>
+</div>
+<app-sauna-form />

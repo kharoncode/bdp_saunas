@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Saunas } from './saunas';
+import { Sauna, Sauna_body } from './sauna';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +18,12 @@ export class SaunasService {
       Expires: '0',
     }),
   };
-  getSaunas(): Observable<Saunas[]> {
-    return this.http.get<Saunas[]>(this.saunasUrl, this.options);
+  getSaunas(): Observable<Sauna[]> {
+    return this.http.get<Sauna[]>(this.saunasUrl, this.options);
+  }
+
+  postSauna(body: Sauna_body): Observable<Sauna[]> {
+    return this.http.post<Sauna[]>(this.saunasUrl, body);
   }
 
   isFull(): Observable<{ isFull: boolean }> {
