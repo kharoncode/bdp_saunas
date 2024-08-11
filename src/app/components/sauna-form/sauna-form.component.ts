@@ -13,13 +13,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { SaunasService } from '../../service/saunas.service';
-
-type Sauna_body = {
-  name: string;
-  size: number;
-  customers: number;
-};
+import { SaunasService } from '../../service/sauna/saunas.service';
 
 @Component({
   selector: 'app-sauna-form',
@@ -50,10 +44,11 @@ export class SaunaFormComponent {
       const newSauna = {
         name: name,
         size: size,
-        customers: 0,
       };
       this.saunasService.postSauna(newSauna).subscribe({
-        next: (saunas) => {},
+        next: (saunas) => {
+          console.log('saunas', saunas);
+        },
       });
       console.log(newSauna);
     }

@@ -1,11 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { LoginModalComponent } from '../../components/login/login-modal/login-modal.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, RouterLinkActive, LoginModalComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  isOpen = false;
+  setIsOpen(bool: boolean) {
+    this.isOpen = bool;
+  }
+}

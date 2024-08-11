@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --font: "Raleway", sans-serif;
+
+  --bg-primary: rgb(239, 236, 231);
+
+  --color-hl1: rgb(42, 125, 225);
+  --color-hl3: rgb(235, 128, 168);
+
+  --filter-primary: invert(24%) sepia(94%) saturate(807%) hue-rotate(137deg)
+    brightness(97%) contrast(101%);
+}

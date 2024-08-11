@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SaunasService } from '../service/saunas.service';
-import { Sauna } from '../service/sauna';
+import { SaunasService } from '../service/sauna/saunas.service';
+import { Sauna } from '../service/type/sauna';
 import { NgFor } from '@angular/common';
 import { SaunaFormComponent } from '../components/sauna-form/sauna-form.component';
 

@@ -1,5 +1,19 @@
 <nav class="flex gap-5 p-5">
-  <h1>Bain des Paquis : Saunas</h1>
-  <a class="ml-auto" routerLink="/">Home</a>
-  <a routerLink="/saunas">Saunas</a>
+  <a routerLink="/"><h1 class="header-logo">BdP - Saunas</h1></a>
+  <a
+    class="header-link mb-auto mt-auto"
+    routerLink="/saunas"
+    routerLinkActive="header-link-active"
+    >Saunas</a
+  >
+  <div
+    class="header-link mb-auto mt-auto ml-auto cursor-pointer"
+    (click)="setIsOpen(true)"
+  >
+    Login
+  </div>
 </nav>
+<app-login-modal
+  [isOpen]="isOpen"
+  (setIsOpen)="setIsOpen($event)"
+></app-login-modal>
