@@ -1,4 +1,4 @@
-<div class="p-3 flex justify-between">
+<div class="p-3 flex justify-between w-full">
   <div class="w-1/4 flex justify-center align-middle">
     <h4 class="text-center">Nom</h4>
   </div>
@@ -11,7 +11,7 @@
   <div class="w-1/4 flex justify-center align-middle"></div>
 </div>
 <div
-  class="p-3 even:bg-cyan-200 flex justify-between"
+  class="p-3 odd:bg-cyan-200 flex justify-between w-full"
   *ngFor="let sauna of saunasList"
 >
   <div class="w-1/4 flex justify-center align-middle">
@@ -23,10 +23,33 @@
     <p>{{ sauna.size }}</p>
   </div>
   <div class="w-1/4 flex justify-center align-middle">
-    <p>{{ sauna.status === 0 ? "Occupé" : "Libre" }}</p>
+    <p>{{ sauna.status === 0 ? "Libre" : "Occupé" }}</p>
   </div>
-  <div class="w-1/4 flex justify-center align-middle">
-    <div>Edit - Empty - Delete</div>
+  <div class="w-1/4 gap-10 flex align-middle">
+    <label class="switch">
+      <input
+        type="checkbox"
+        [checked]="sauna.status != 0"
+        (click)="saunaSelected = sauna"
+        (click)="handleEditSaunaSubmit({ status: sauna.status != 0 ? 0 : 1 })"
+      />
+      <span class="slider round"></span>
+    </label>
+    <div>
+      <span class="cursor-pointer" (click)="selectSauna(sauna)">Edit</span> /
+      <span class="cursor-pointer" (click)="handleDeleteSaunaSubmit(sauna.id)"
+        >Delete</span
+      >
+    </div>
   </div>
 </div>
-<app-sauna-form />
+<app-sauna-form
+  [sauna]="{ id: -1, name: 'Nouveau Sauna', size: 1, status: 0 }"
+  (handleSubmit)="handleAddSaunaSubmit($event)"
+/>
+<app-modal [isOpen]="modalIsOpen" (setIsOpen)="toggleModal($event)">
+  <app-sauna-form
+    [sauna]="saunaSelected"
+    (handleSubmit)="handleEditSaunaSubmit($event)"
+  />
+</app-modal>

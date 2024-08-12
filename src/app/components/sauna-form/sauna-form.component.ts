@@ -5,6 +5,7 @@ import {
   OnChanges,
   Output,
   EventEmitter,
+  SimpleChanges,
 } from '@angular/core';
 import {
   FormControl,
@@ -13,7 +14,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { SaunasService } from '../../service/sauna/saunas.service';
+//import { SaunasService } from '../../service/sauna/saunas.service';
+import { Sauna, Sauna_body } from '../../service/type/sauna';
 
 @Component({
   selector: 'app-sauna-form',
@@ -22,7 +24,17 @@ import { SaunasService } from '../../service/sauna/saunas.service';
   templateUrl: './sauna-form.component.html',
   styleUrl: './sauna-form.component.scss',
 })
-export class SaunaFormComponent {
+export class SaunaFormComponent implements OnChanges {
+  @Input() sauna: Sauna;
+  @Output() handleSubmit = new EventEmitter<Sauna_body>();
+
+  ngOnChanges(): void {
+    this.sauna &&
+      this.saunaForm.patchValue({
+        name: this.sauna.name,
+        size: this.sauna.size,
+      });
+  }
   saunaForm = new FormGroup({
     name: new FormControl('Nouveau Sauna', [
       Validators.required,
@@ -31,7 +43,7 @@ export class SaunaFormComponent {
     size: new FormControl(1, [Validators.required, Validators.min(1)]),
   });
 
-  constructor(private saunasService: SaunasService) {}
+  //constructor(private saunasService: SaunasService) {}
 
   handleFormSubmit($event: Event) {
     $event.preventDefault();
@@ -45,12 +57,8 @@ export class SaunaFormComponent {
         name: name,
         size: size,
       };
-      this.saunasService.postSauna(newSauna).subscribe({
-        next: (saunas) => {
-          console.log('saunas', saunas);
-        },
-      });
-      console.log(newSauna);
+
+      this.handleSubmit.emit(newSauna);
     }
   }
 }

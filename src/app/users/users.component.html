@@ -1,0 +1,34 @@
+<div class="p-3 flex justify-between w-full">
+  <div class="w-1/4 flex justify-center align-middle">
+    <h4 class="text-center">Nom</h4>
+  </div>
+  <div class="w-1/4 flex justify-center align-middle"></div>
+</div>
+<div
+  class="p-3 odd:bg-cyan-200 flex justify-between w-full"
+  *ngFor="let user of usersList"
+>
+  <div class="w-1/4 flex justify-center align-middle">
+    <h4 class="text-center">
+      {{ user.username }}
+    </h4>
+  </div>
+  <div class="w-1/4 gap-10 flex align-middle">
+    <div>
+      <span class="cursor-pointer" (click)="selectUser(user)">Edit</span> /
+      <span class="cursor-pointer" (click)="handleDeleteUserSubmit(user.id)"
+        >Delete</span
+      >
+    </div>
+  </div>
+</div>
+<app-user-form
+  [user]="{ id: '-1', username: 'Nouvel Utilisateur', password: '' }"
+  (handleSubmit)="handleAddUserSubmit($event)"
+/>
+<app-modal [isOpen]="modalIsOpen" (setIsOpen)="toggleModal($event)">
+  <app-user-form
+    [user]="userSelected"
+    (handleSubmit)="handleEditUserSubmit($event)"
+  />
+</app-modal>

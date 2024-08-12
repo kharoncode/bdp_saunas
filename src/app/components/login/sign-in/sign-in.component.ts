@@ -49,20 +49,6 @@ export class SignInComponent {
     if (!this.signInForm.valid) {
       return;
     }
-    // this.userService
-    //    .postUser({
-    //       firstName: 'FirstName',
-    //       lastName: 'LastName',
-    //       mail: 'firstname@lastname.com',
-    //       phone: '0033612345678',
-    //       password: '1234',
-    //    })
-    //    .subscribe({
-    //       next: (user) => {
-    //          console.log(user);
-    //       },
-    //    });
-    console.log(data);
     this.signInForm.reset();
   }
 

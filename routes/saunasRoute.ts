@@ -1,17 +1,18 @@
 // routes/users.js
 import express from 'express';
 import { dbConnection } from '../db_connection';
-export const saunasRouter = express.Router();
+export const saunasRoute = express.Router();
 
-saunasRouter
+saunasRoute
   .get('/', (req, res) => {
     const query = 'SELECT * FROM saunas';
 
     dbConnection.query(query, (error, results) => {
       if (error) {
-        return res.status(500).json({ error: error.message });
+        res.status(500).json({ error: error.message });
+        return;
       }
-      return res.json(results);
+      res.json(results);
     });
   })
   .post('/', (req, res) => {
@@ -100,5 +101,3 @@ saunasRouter
       });
     });
   });
-
-//module.exports = router;

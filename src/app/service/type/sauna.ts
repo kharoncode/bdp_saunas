@@ -6,6 +6,7 @@ export type Sauna = {
 };
 
 export type Sauna_body = {
-  name: string;
-  size: number;
+  name?: string;
+  size?: number;
+  status?: number;
 };

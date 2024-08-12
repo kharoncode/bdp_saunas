@@ -2,14 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Sauna, Sauna_body } from '../type/sauna';
+import host from '../host';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SaunasService {
-  private host = 'https://kharon.alwaysdata.net';
-  private saunasUrl = `${this.host}/api/saunas`;
-  private isFullUrl = `${this.host}/api/isfull`;
+  private saunasUrl = `${host}/api/saunas`;
+  private isFullUrl = `${host}/api/isfull`;
   constructor(private http: HttpClient) {}
   options = {
     headers: new HttpHeaders({
@@ -24,6 +24,17 @@ export class SaunasService {
 
   postSauna(body: Sauna_body): Observable<Sauna[]> {
     return this.http.post<Sauna[]>(this.saunasUrl, body);
+  }
+
+  editSauna(body: { id: number; data: Sauna_body }): Observable<Sauna[]> {
+    return this.http.patch<Sauna[]>(this.saunasUrl, body);
+  }
+
+  deleteSauna(body: { id: number }): Observable<Sauna[]> {
+    return this.http.delete<Sauna[]>(this.saunasUrl, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      body: body,
+    });
   }
 
   isFull(): Observable<{ isFull: boolean }> {
