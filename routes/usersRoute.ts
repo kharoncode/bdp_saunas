@@ -1,7 +1,12 @@
-// routes/users.js
 import express from 'express';
 import { dbConnection } from '../db_connection';
+import { User } from '../src/app/service/type/users';
+import { RowDataPacket } from 'mysql2';
 export const usersRoute = express.Router();
+
+interface UserCountResult extends RowDataPacket {
+  userCount: number;
+}
 
 // Route GET pour obtenir les utilisateurs
 usersRoute
@@ -81,11 +86,25 @@ usersRoute
     const { id } = req.body;
     const query = `DELETE FROM users WHERE id = ?`;
     const selectQuery = 'SELECT * FROM users';
+    const countQuery = 'SELECT COUNT(*) AS userCount FROM users';
 
     if (!id) {
       res.status(400).json({ error: 'ID is required' });
       return;
     }
+
+    dbConnection.query<UserCountResult[]>(countQuery, (countError, countResults) => {
+      if (countError) {
+          res.status(500).json({ error: countError.message });
+          return;
+      }
+
+      const userCount = countResults[0].userCount;
+
+      if (userCount <= 1) {
+          res.status(400).json({ error: 'Cannot delete the last user' });
+          return;
+      }
 
     dbConnection.query(query, [id], (error, results) => {
       if (error) {
@@ -102,5 +121,5 @@ usersRoute
         res.status(200).json(selectResults);
         return;
       });
-    });
+    });})
   });

@@ -1,6 +1,8 @@
 import { Session, User } from 'lucia';
 import { lucia } from './lucia';
 import { Request, Response, NextFunction } from 'express';
+import jwt, { JwtPayload, VerifyErrors } from 'jsonwebtoken';
+import { JWT_SK } from '../host';
 
 declare global {
   namespace Express {
@@ -46,4 +48,27 @@ export const authMiddleware = async (
   } catch (error) {
     return res.status(500).send('Erreur serveur'); // Retourne une réponse en cas d'erreur
   }
+};
+
+
+export const authMiddlewareJWT = (req: Request, res: Response, next: NextFunction): Response | void => {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader) {
+      return res.status(401).json({ message: 'Token manquant' });
+  }
+
+  const token = authHeader.split(' ')[1];
+
+  jwt.verify(token, JWT_SK as string, (err: VerifyErrors|null,user:any) => {
+      if (err) {
+          return res.status(403).json({ message: 'Token invalide' });
+      }
+
+      req.user = user;
+
+      next();
+      return
+  });
+  
 };

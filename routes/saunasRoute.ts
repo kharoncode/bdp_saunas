@@ -1,4 +1,3 @@
-// routes/users.js
 import express from 'express';
 import { dbConnection } from '../db_connection';
 export const saunasRoute = express.Router();
