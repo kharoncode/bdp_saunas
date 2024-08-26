@@ -1,0 +1,33 @@
+.header {
+  &-link {
+    cursor: pointer;
+    transition-duration: 300ms;
+    border-bottom: solid 1px transparent;
+    padding: 5px 0 4px 0;
+    font-weight: 700;
+    margin: auto 0;
+    &:hover {
+      color: var(--color-hl1);
+      transition-duration: 400ms;
+    }
+    &-active {
+      border-color: var(--color-hl1);
+      color: var(--color-hl1);
+    }
+    &-login{
+      margin: auto 0 auto auto;
+    }
+  }
+
+  &-logo {
+    font-size: 1.5rem;
+    color: var(--color-hl1);
+    margin-right: 20px;
+  }
+
+  &-nav{
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+  }
+}

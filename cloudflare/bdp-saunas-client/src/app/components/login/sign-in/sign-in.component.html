@@ -1,0 +1,76 @@
+<form [formGroup]="signInForm" (submit)="handleSubmit($event)">
+  <div class="input-text--container">
+    <input
+      [ngClass]="{
+        invalid:
+          signInForm.controls['login'].invalid &&
+          signInForm.controls['login'].touched
+      }"
+      (focus)="onFocus('login', true)"
+      (focusout)="onFocus('login', false)"
+      type="text"
+      id="login"
+      name="login"
+      formControlName="login"
+    />
+    <app-error-message
+      *ngIf="
+        signInForm.controls['login'].invalid &&
+        signInForm.controls['login'].touched
+      "
+      [content]="'Login is required (Lenght 3)'"
+    />
+    <label
+      [ngClass]="{
+        focus: signInForm.value.login !== '' || isFocus.login
+      }"
+      for="login"
+      >Nom</label
+    >
+  </div>
+  <div class="input-text--container">
+    <input
+      [ngClass]="{
+        invalid:
+          signInForm.controls['password'].invalid &&
+          signInForm.controls['password'].touched
+      }"
+      (focus)="onFocus('password', true)"
+      (focusout)="onFocus('password', false)"
+      type="password"
+      id="password"
+      name="password"
+      formControlName="password"
+    />
+    <app-error-message
+      *ngIf="
+        signInForm.controls['password'].invalid &&
+        signInForm.controls['password'].touched
+      "
+      [content]="'Password is required (Lenght 8)'"
+    />
+    <label
+      [ngClass]="{
+        focus: signInForm.value.password !== '' || isFocus.password
+      }"
+      for="password"
+      >Mot de Passe</label
+    >
+  </div>
+  <div class="input-checkbox--container">
+    <input
+      type="checkbox"
+      name="rememberMe"
+      id="rememberMe"
+      formControlName="rememberMe"
+    />
+    <label for="rememberMe">Se souvenir de moi</label>
+  </div>
+  <button
+    [ngClass]="{ submit_valid: signInForm.valid }"
+    class="submit"
+    type="submit"
+  >
+    Connexion
+  </button>
+</form>

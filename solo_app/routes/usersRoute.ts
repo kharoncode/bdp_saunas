@@ -1,6 +1,5 @@
 import express from 'express';
 import { dbConnection } from '../db_connection';
-import { User } from '../src/app/service/type/users';
 import { RowDataPacket } from 'mysql2';
 export const usersRoute = express.Router();
 
@@ -11,6 +10,7 @@ interface UserCountResult extends RowDataPacket {
 // Route GET pour obtenir les utilisateurs
 usersRoute
   .get('/', (req, res) => {
+
     const query = 'SELECT * FROM users';
 
     dbConnection.query(query, (error, results) => {

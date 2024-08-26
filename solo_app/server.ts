@@ -6,7 +6,6 @@ import { dirname, join, resolve } from 'node:path';
 import bootstrap from './src/main.server';
 import { dbConnection } from './db_connection';
 import cors from 'cors';
-import { authMiddleware, authMiddlewareJWT } from './auth/middleware';
 import { usersRoute } from './routes/usersRoute';
 import { saunasRoute } from './routes/saunasRoute';
 import { loginRoute } from './routes/loginRoute';
@@ -29,12 +28,9 @@ export function app(): express.Express {
   server.use(express.json());
   server.use(express.urlencoded({ extended: true }));
 
-  //const userRoutes = require('./routes/usersRoute');
-  //const saunaRoutes = require('./routes/saunasRoute');
-  server.use('/api/users', usersRoute);
-  server.use('/api/saunas', saunasRoute);
   server.use('/api/login', loginRoute);
-  //server.use('/api/saunas', authMiddleware, saunasRouter);
+  server.use('/api/users',usersRoute,);
+  server.use('/api/saunas',saunasRoute);
 
   server.get('/api/isfull', (req, res) => {
     const query = 'SELECT * FROM saunas where status = 0';
