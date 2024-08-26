@@ -15,6 +15,13 @@
       "when": 1724679419116,
       "tag": "0001_yielding_micromacro",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1724680848163,
+      "tag": "0002_organic_blackheart",
+      "breakpoints": true
     }
   ]
 }

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { User, User_body } from '../service/type/users';
-import { LoginService } from '../service/login/login.service';
 import { NgFor } from '@angular/common';
 import { ModalComponent } from '../components/modal/modal.component';
 import { UserFormComponent } from '../components/user-form/user-form.component';
 import { AddButtonComponent } from '../components/add-button/add-button.component';
+import { UserService } from '../service/user/user.service';
 
 @Component({
    selector: 'app-users',
@@ -19,14 +19,16 @@ export class UsersComponent {
    usersList: User[] = [];
    userSelected: User = {
       id: '0',
-      username: 'Nouvel Utilisateur',
+      firstName: 'Prénom',
+      lastName: 'Nom',
+      username: 'Login',
       password: '',
-      status: 0,
+      status: false,
    };
-   constructor(private loginService: LoginService) {}
+   constructor(private userService: UserService) {}
 
    ngOnInit(): void {
-      this.loginService.getUsers().subscribe({
+      this.userService.getUsers().subscribe({
          next: (users) => {
             this.usersList = users;
          },
@@ -42,7 +44,7 @@ export class UsersComponent {
    }
 
    handleAddUserSubmit(data: User_body) {
-      this.loginService.postUser(data).subscribe({
+      this.userService.postUser(data).subscribe({
          next: (users) => {
             this.usersList = users;
          },
@@ -51,7 +53,7 @@ export class UsersComponent {
 
    handleEditUserSubmit(data: User_body) {
       const editUser = { id: this.userSelected.id, data: data };
-      this.loginService.editUser(editUser).subscribe({
+      this.userService.editUser(editUser).subscribe({
          next: (users) => {
             this.usersList = users;
             this.modalIsOpen = false;
@@ -65,7 +67,7 @@ export class UsersComponent {
    }
 
    handleDeleteUserSubmit(id: string) {
-      this.loginService.deleteUser({ id: id }).subscribe({
+      this.userService.deleteUser({ id: id }).subscribe({
          next: (users) => {
             this.usersList = users;
          },

@@ -5,8 +5,13 @@ import usersRoute from './routes/users';
 
 const app = new Hono<{ Bindings: Bindings }>();
 
-app.use('*', cors({ origin: 'http://localhost:4200' }));
-app.get('/', (c) => {
+app.use('*', (c, next) => {
+	const corsOptions = {
+		origin: c.env.CORS_ALLOWED_ORIGIN,
+	};
+	return cors(corsOptions)(c, next);
+});
+app.get('/', async (c) => {
 	return c.json({ msg: 'Welcome !' }, 200);
 });
 

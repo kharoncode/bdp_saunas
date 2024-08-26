@@ -10,7 +10,12 @@
    <div class="table-row" *ngFor="let user of usersList">
       <div class="table-cell">
          <p class="table-row-name">
-            {{ user.username }}
+            {{ user.firstName }}
+         </p>
+      </div>
+      <div class="table-cell">
+         <p class="table-row-name">
+            {{ user.lastName }}
          </p>
       </div>
       <div class="table-cell">
@@ -19,22 +24,15 @@
          </p>
       </div>
       <div class="table-cell">
-         <p class="table-row-name">
-            {{ user.username }}
-         </p>
-      </div>
-      <div class="table-cell">
-         <p>Employee</p>
+         <p>{{ !user.status ? 'Admin' : 'Employee' }}</p>
       </div>
       <div class="table-cell">
          <label class="switch">
             <input
                type="checkbox"
-               [checked]="user.status != 0"
+               [checked]="user.status"
                (click)="userSelected = user"
-               (click)="
-                  handleEditUserSubmit({ status: user.status != 0 ? 0 : 1 })
-               "
+               (click)="handleEditUserSubmit({ status: !user.status })"
             />
             <span class="slider"></span>
          </label>
@@ -69,9 +67,11 @@
          whichForm === 'add'
             ? {
                  id: '-1',
-                 username: 'Nouvel Utilisateur',
+                 firstName: 'Prénom',
+                 lastName: 'Nom',
+                 username: 'Login',
                  password: '',
-                 status: 0
+                 status: false
               }
             : userSelected
       "

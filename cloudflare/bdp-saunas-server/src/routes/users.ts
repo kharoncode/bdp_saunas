@@ -10,7 +10,7 @@ const usersRoute = new Hono<{ Bindings: Bindings }>();
 usersRoute
 	.get('/', async (c) => {
 		const db = drizzle(c.env.DB);
-		const resp = await db.select().from(users);
+		const resp = await db.select().from(users).all();
 		return c.json(resp);
 	})
 	.post('/', async (c) => {
@@ -19,7 +19,8 @@ usersRoute
 			const user = await c.req.json();
 			user.password = bcrypt.hashSync(user.password, 10);
 			const resp = await db.insert(users).values(user).returning();
-			return c.json(resp, 200);
+			const allUsers = await db.select().from(users);
+			return c.json(allUsers, 200);
 		} catch (error) {
 			console.error("Erreur lors de la création de l'utilisateur:", error);
 			if (error instanceof Error && error.message.includes('UNIQUE constraint failed: users.mail')) {
@@ -48,7 +49,8 @@ usersRoute
 			const resp = await db.update(users).set(data).where(eq(users.id, id)).returning();
 
 			if (resp.length > 0) {
-				return c.json(resp[0], 200);
+				const allUsers = await db.select().from(users);
+				return c.json(allUsers, 200);
 			} else {
 				return c.json({ error: 'Aucune modification effectuée.' }, 400);
 			}
@@ -66,7 +68,8 @@ usersRoute
 			}
 			const resp = await db.delete(users).where(eq(users.id, id)).returning();
 			if (resp.length > 0) {
-				return c.json({ msg: 'Utilisateur correctement supprimé !' }, 200);
+				const allUsers = await db.select().from(users);
+				return c.json(allUsers, 200);
 			} else {
 				return c.json({ error: 'Aucune modification effectuée.' }, 400);
 			}

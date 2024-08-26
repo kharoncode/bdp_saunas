@@ -5,7 +5,7 @@ const users = sqliteTable('users', {
 	id: integer('id').primaryKey(),
 	firstName: text('firstName').notNull(),
 	lastName: text('lastName').notNull(),
-	login: text('login').notNull().unique(),
+	username: text('username').notNull().unique(),
 	status: integer('status', { mode: 'boolean' }).notNull(),
 	password: text('password').notNull(),
 	created_at: text('created_at')
