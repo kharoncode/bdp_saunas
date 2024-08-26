@@ -1,4 +1,5 @@
-//const host = 'https://kharon.alwaysdata.net';
-const host = 'http://localhost:8787';
+import { environment } from '../../environments/environment';
+
+const host = environment.apiUrl;
 
 export default host;

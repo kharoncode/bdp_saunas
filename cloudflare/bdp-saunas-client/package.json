@@ -1,13 +1,14 @@
 {
-   "name": "bpd-saunas-client",
+   "name": "client",
    "version": "0.0.0",
    "scripts": {
       "ng": "ng",
+      "so": "ng serve -o --configuration development",
       "start": "npm run build && wrangler pages dev dist/cloudflare --compatibility-date=2024-08-21 --experimental-local",
-      "build": "ng build --configuration production && npm run process",
+      "build": "ng build && npm run process",
       "watch": "ng build --watch --configuration development",
       "test": "ng test",
-      "serve:ssr:bpd-saunas-client": "node dist/bpd-saunas-client/server/server.mjs",
+      "serve:ssr:client": "node dist/client/server/server.mjs",
       "process": "node ./tools/copy-files.mjs && node ./tools/alter-polyfills.mjs",
       "deploy": "npm run build && wrangler pages deploy dist/cloudflare"
    },

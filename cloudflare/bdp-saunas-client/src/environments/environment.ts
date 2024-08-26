@@ -1,5 +1,4 @@
 export const environment = {
-   production: false,
-   apiUrl: 'http://localhost:8787', // URL de votre API locale
-   corsAllowedOrigin: 'http://localhost:4200',
+   production: true,
+   apiUrl: 'https://bdp-saunas-server.waaldo.workers.dev',
 };
