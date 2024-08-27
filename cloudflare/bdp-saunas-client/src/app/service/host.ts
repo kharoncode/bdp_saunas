@@ -1,5 +1,3 @@
-import { environment } from '../../environments/environment';
-
-const host = environment.apiUrl;
+const host = "http://localhost:8787";
 
 export default host;

@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "client": {
+    "bdp-saunas-client": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -79,10 +79,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "client:build:production"
+              "buildTarget": "bdp-saunas-client:build:production"
             },
             "development": {
-              "buildTarget": "client:build:development"
+              "buildTarget": "bdp-saunas-client:build:development"
             }
           },
           "defaultConfiguration": "development"

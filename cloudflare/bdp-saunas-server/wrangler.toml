@@ -9,27 +9,6 @@ binding = "DB" # i.e. available in your Worker on env.DB
 database_name = "bdp-saunas-db"
 database_id = "db916433-c51f-47c2-8abd-c42a9b397db2"
 
-[env.local]
-[[env.local.d1_databases]]
-binding = "DB"
-database_name = "bdp-saunas-db"
-database_id = "db916433-c51f-47c2-8abd-c42a9b397db2"
-
-[env.local.vars]
-API_URL = "http://localhost:8787"
-CORS_ALLOWED_ORIGIN = "http://localhost:4200"
-
-# Variables d'environnement pour l'environnement de production
-[env.production]
-[[env.production.d1_databases]]
-binding = "DB"
-database_name = "bdp-saunas-db"
-database_id = "db916433-c51f-47c2-8abd-c42a9b397db2"
-
-[env.production.vars]
-API_URL = "https://bdp-saunas-server.waaldo.workers.dev/"
-CORS_ALLOWED_ORIGIN = "https://bdp-saunas-client.pages.dev/"
-
 
 
 

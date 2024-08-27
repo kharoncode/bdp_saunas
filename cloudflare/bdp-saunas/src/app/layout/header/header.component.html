@@ -1,0 +1,25 @@
+<nav class="header-nav">
+  <a routerLink="/"><h1 class="header-logo">BdP - Saunas</h1></a>
+  <a
+    class="header-link"
+    routerLink="/saunas"
+    routerLinkActive="header-link-active"
+    >Saunas</a
+  >
+  <a
+    class="header-link"
+    routerLink="/users"
+    routerLinkActive="header-link-active"
+    >Users</a
+  >
+  <div
+    class="header-link header-link-login"
+    (click)="setIsOpen(true)"
+  >
+    Login
+  </div>
+</nav>
+<app-login-modal
+  [isOpen]="isOpen"
+  (setIsOpen)="setIsOpen($event)"
+></app-login-modal>
