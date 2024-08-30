@@ -1,3 +1,3 @@
-const host = "http://localhost:8787";
+const host = 'http://localhost:8787';
 
 export default host;

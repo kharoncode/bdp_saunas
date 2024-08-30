@@ -5,7 +5,7 @@ import usersRoute from './routes/users';
 
 const app = new Hono<{ Bindings: Bindings }>();
 
-app.use('*', cors({ origin: '*' }));
+app.use('*', cors({ origin: 'https://bdp-saunas.pages.dev' }));
 
 app.get('/', async (c) => {
 	return c.json({ msg: 'Welcome !' }, 200);
